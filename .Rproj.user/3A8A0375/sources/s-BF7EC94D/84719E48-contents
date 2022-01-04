@@ -1,0 +1,56 @@
+#.libPaths("D://RStudio//R")
+library(shiny)
+library(shinythemes)
+library(caret)
+library(lubridate)
+library(data.table)
+library(tidytext)
+library(tm)
+library(SnowballC)
+library(wordcloud)
+library(stopwords)
+library(e1071)
+rf_model <- readRDS("rf_model.rds")
+
+
+
+# Define UI
+ui <- fluidPage(theme = shinytheme("cerulean"),
+                navbarPage(
+                  # theme = "cerulean",  # <--- To use a theme, uncomment this
+                  "Fake Job Prediction",
+                  tabPanel("Predict",
+                           sidebarPanel(
+                             tags$h3("Paste Job Description here:"),
+                             textAreaInput("txt1","","Hello World"),
+
+                           ), # sidebarPanel
+                           mainPanel(
+                             h2("Result"),
+                             
+                             verbatimTextOutput("txtout"),
+                             
+                           ) # mainPanel
+                           
+                  ), # Navbar 1, tabPanel
+                  
+                  
+                ) # navbarPage
+) # fluidPage
+
+
+# Define server function  
+server <- function(input, output) {
+  
+  
+  
+
+  
+  
+
+
+} # server
+
+
+# Create Shiny object
+shinyApp(ui = ui, server = server)

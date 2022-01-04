@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Fake Job Prediction</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="vendor/bootstrap/css/bootstrap.min.css"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="fonts/font-awesome-4.7.0/css/font-awesome.min.css"
+    />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css" />
+
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="vendor/css-hamburgers/hamburgers.min.css"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="vendor/animsition/css/animsition.min.css"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="vendor/select2/select2.min.css"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="vendor/daterangepicker/daterangepicker.css"
+    />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="css/util.css" />
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+
+    <!--===============================================================================================-->
+  </head>
+  <body>
+    <div class="container-contact100">
+      <div class="wrap-contact100">
+        <form onsubmit="return false;" class="contact100-form validate-form">
+          <span class="contact100-form-title">
+            Fake or Real Job Prediction
+          </span>
+
+          <div
+            class="wrap-input100 validate-input"
+            data-validate="Please enter your message"
+          >
+            <textarea
+              class="input100"
+              id="jd"
+              placeholder="Paste Job Description here"
+            ></textarea>
+            <span class="focus-input100"></span>
+          </div>
+
+          <div class="container-contact100-form-btn">
+            <button
+              class="contact100-form-btn"
+              type="submit"
+              onclick="predict()"
+            >
+              <span>
+                <i class="fa fa-paper-plane-o m-r-6" aria-hidden="true"></i>
+                KNOW
+              </span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div id="modal-success">
+      <div class="Modal text-center">
+        <div class="ModalHeader">
+          <a href="#">
+            <i class="fa fa-times" aria-hidden="true"></i>
+          </a>
+        </div>
+        <div class="ModalBody text-center center-block">
+          <div class="icon text-center">
+            <i class="fa fa-check" aria-hidden="true"></i>
+          </div>
+          <h2>Succes!</h2>
+          <p>
+            Iti multumim pentru mesaj, in curand ne vom pune in contact cu tine.
+          </p>
+        </div>
+        <div class="ModalFooter">
+          <a href="#">Inchide</a>
+        </div>
+      </div>
+    </div>
+
+    <div id="dropDownSelect1"></div>
+
+    <!--===============================================================================================-->
+    <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/animsition/js/animsition.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/bootstrap/js/popper.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/select2/select2.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/daterangepicker/moment.min.js"></script>
+    <script src="vendor/daterangepicker/daterangepicker.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/countdowntime/countdowntime.js"></script>
+    <!--===============================================================================================-->
+    <script src="js/main.js"></script>
+    <!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+      function predict() {
+        var jd = document.getElementById("jd").value;
+        url = "http://127.0.0.1:9883/predict?jd=" + jd;
+        url = url.toString();
+        // alert(url);
+
+        // const params = {
+        //   method: "GET",
+        //   mode: "no-cors",
+        //   headers: {
+        //     "Access-Control-Allow-Origin": "*",
+        //     Accept: "application/json",
+        //     "Content-Type": "application/json",
+        //   },
+        // };
+
+        // // var output = null;
+        // fetch(url)
+        //   .then(function (response) {
+        //     console.log(response.text());
+        //   })
+        //   .then((data) => {
+        //     console.log(data);
+        //     return data;
+        //   })
+        //   .catch(function (err) {
+        //     console.error("From catch " + err);
+        //   });
+
+        async function load(url) {
+          let response = await fetch(url);
+          let data = await response.json();
+          if (data == 0) {
+            swal.fire("Good job!", "You clicked the button!", "success");
+            swal.fire({
+              title: "Hurray!!!",
+              text: "The Job description seems legit",
+              icon: "success",
+              backdrop: `rgba(0,200,0,0.3)`,
+            });
+          } else {
+            swal.fire({
+              title: "Oops...!",
+              text: "The Job description seems fradulent",
+              icon: "warning",
+              backdrop: `
+              rgba(200, 0, 0, 0.3)`,
+            });
+          }
+        }
+        load(url);
+      }
+    </script>
+  </body>
+</html>

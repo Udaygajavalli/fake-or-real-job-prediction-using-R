@@ -1,0 +1,7 @@
+[1,"** Installing R Packages: 'shiny', 'shinythemes'\r\n"]
+[1,"\r\n"]
+[1,"\r\n"]
+[1,"\r\n"]
+[1,"[1/9] Installing httpuv...\r\n"]
+[1,"\r\n"]
+[2,"Installing package into 'C:/Users/udayg/Documents/R/win-library/4.1'\r\n(as 'lib' is unspecified)\r\nWarning in utils::install.packages(\"httpuv\", repos = \"https://cran.rstudio.com/\") :\r\n  'lib = \"C:/Users/udayg/Documents/R/win-library/4.1\"' is not writable\r\nError in utils::install.packages(\"httpuv\", repos = \"https://cran.rstudio.com/\") : \r\n  unable to install packages\r\nCalls: sourceWithProgress -> eval -> eval -> <Anonymous>\r\nExecution halted\r\n"]
